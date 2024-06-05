@@ -1,8 +1,9 @@
 import express, {Request, Response}  from "express";
 import cors from "cors";
 import 'dotenv/config';
+import morgan from "morgan";
 import mongoose from "mongoose";
-import morgan from 'morgan';
+
 import { v2 as cloudinary } from 'cloudinary';
 
 //Importamos el archivo de ruta de usuarios

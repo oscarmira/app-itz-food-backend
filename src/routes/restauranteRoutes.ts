@@ -3,6 +3,7 @@ import multer from "multer";
 import restauranteController from "../controllers/restauranteController";
 import { validateRestauranteRequest } from "../middleware/validation";
 import { jwtCheck, jwtParse } from "../middleware/auth";
+import { param } from 'express-validator';
 
 const router = express.Router();
 
@@ -17,10 +18,13 @@ const upload = multer({
 //Rutas para el restaurante
 
 //Ruta para obtener los datos de un restaurante
-router.get('/',
-     jwtCheck,
-     jwtParse,
-     restauranteController.getRestaurante);
+router.get("/search/:city",
+    param("city").isString()
+                 .trim()
+                 .notEmpty()
+                 .withMessage("El parámetro ciudad debe ser un string válido"),
+    
+    restauranteController.searchRestaurante);
 
 //Ruta para crear un restaurante
 router.post('/', 
@@ -38,6 +42,15 @@ router.put("/",
     upload.single("imageFile"),
     validateRestauranteRequest,
     restauranteController.updateRestaurante
+);
+
+//Ruta para buscar un restaurante
+router.get("/serrch/:city",
+    param("city").isString()
+                  .trim()
+                  .notEmpty()
+                  .withMessage("El parámetro ciudad debe ser un string válido"),
+    restauranteController.searchRestaurante
 );
 
 export default router;

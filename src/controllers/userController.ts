@@ -7,7 +7,7 @@ const createUser = async (req: Request, res: Response) => {
     //2.- Crear un usuario si no existe
     //3.- Regresar el objeto usuario al cliente
     try{
-        const { auth0Id } = req.body;
+        const { auth0Id } = req.body ;
         const existingUser = await User.findOne({auth0Id});
 
         if (existingUser) //Si ya está en la base de datos

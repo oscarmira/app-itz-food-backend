@@ -3,7 +3,7 @@ import userController from "../controllers/userController";
 import { jwtCheck, jwtParse } from "../middleware/auth";
 import { validateUserRequest } from "../middleware/validation";
 
-const router = express.Router();
+const router = express.Router() ;
 
 //Ruta para obtener un usuario
 router.get('/', jwtCheck, jwtParse, userController.getUser);
